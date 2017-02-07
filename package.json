@@ -1,0 +1,33 @@
+{
+  "name": "pr-board",
+  "version": "1.0.0",
+  "description": "View pull requests across multiple GitHub repos",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeattardi/pr-board.git"
+  },
+  "author": "Joe Attardi <joe@attardi.net> (http://www.thinksincode.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joeattardi/pr-board/issues"
+  },
+  "homepage": "https://github.com/joeattardi/pr-board#readme",
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-latest": "^6.22.0",
+    "css-loader": "^0.26.1",
+    "vue-loader": "^10.3.0",
+    "vue-template-compiler": "^2.1.10",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
+  },
+  "dependencies": {
+    "vue": "^2.1.10"
+  }
+}
