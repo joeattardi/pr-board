@@ -1,7 +1,12 @@
 <template>
   <div id="user-menu" v-if="showMenu">
     <div><strong>{{ currentUser.displayName }}</strong></div>
-    <div><button @click.prevent="signOut">Sign out</button></div>
+    <div>
+      <button @click.prevent="signOut">
+        <i class="fa fa-sign-out" aria-hidden="true"></i>
+        Sign out
+      </button>
+    </div>
   </div>
 </template>
 

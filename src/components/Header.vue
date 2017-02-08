@@ -3,7 +3,7 @@
     <img height="20" width="20" src="headerLogo.png" />
     <h1>PR Board</h1>
     <div class="spacer"></div>
-    <div class="user-info" @click="showUserMenu">
+    <div v-if="loggedIn" class="user-info" @click="showUserMenu">
       <img :src="currentUser.photoURL" width="32" height="32" />
       <i class="fa fa-caret-down" aria-hidden="true"></i>
     </div>
@@ -12,7 +12,6 @@
 </template>
 
 <script>
-  import firebaseApp from '../firebase';
   import UserMenu from './UserMenu';
 
   export default {
@@ -22,12 +21,12 @@
     computed: {
       currentUser() {
         return this.$store.state.user || {};
+      },
+      loggedIn() {
+        return this.$store.state.user != null;
       }
     },
     methods: {
-      signOut() {
-        firebaseApp.auth().signOut(); 
-      },
       showUserMenu(event) {
         event.stopPropagation();
         this.$store.dispatch('showUserMenu');

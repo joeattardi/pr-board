@@ -1,7 +1,9 @@
 <template>
   <div id="content-container" @click="hideUserMenu">
     <app-header />
-    <a href="#" @click.prevent="signInGitHub">Sign in with GitHub</a>
+    <div id="content-body">
+      <login-container v-if="!loggedIn" />
+    </div>
   </div>
 </template>
 
@@ -9,10 +11,17 @@
   import firebase from 'firebase';
 
   import Header from './components/Header';
+  import LoginContainer from './components/LoginContainer';
 
   export default {
     components: {
-      'app-header': Header
+      'app-header': Header,
+      'login-container': LoginContainer
+    },
+    computed: {
+      loggedIn() {
+        return this.$store.state.user != null;
+      }
     },
     methods: {
       hideUserMenu() {
@@ -31,5 +40,9 @@
 <style lang="sass">
   #content-container {
     height: 100vh;
+
+    #content-body {
+      padding: 0.5em;
+    }
   }
 </style>
