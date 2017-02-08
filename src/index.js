@@ -5,6 +5,7 @@ import './images/favicon.png';
 import './images/headerLogo.png';
 import './scss/index.scss';
 import App from './App';
+import store from './store/index';
 
 const firebaseApp = firebase.initializeApp({
   apiKey: FIREBASE_API_KEY,
@@ -15,10 +16,11 @@ const firebaseApp = firebase.initializeApp({
 });
 
 firebaseApp.auth().onAuthStateChanged(user => {
-  console.log(user);
+  store.dispatch('setUser', user);
 });
 
 new Vue({
   el: '#app',
+  store,
   render: h => h(App)
 });

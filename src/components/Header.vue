@@ -3,7 +3,7 @@
     <img height="20" width="20" src="headerLogo.png" />
     <h1>PR Board</h1>
     <div class="user-info">
-      User: {{ currentUser }}
+      <img :src="currentUser.photoURL" width="32" height="32" />
     </div>
   </header>
 </template>
@@ -14,15 +14,11 @@
   export default {
     computed: {
       currentUser() {
-        console.log(firebase.auth().currentUser);
-        return firebase.auth().currentUser;
+        return this.$store.state.user || {};
       }
     }
   };
 
-  //firebase.auth().onAuthStateChanged(user => {
-    //console.log(user);
-  //});
 </script>
 
 <style lang="sass">
@@ -44,6 +40,17 @@
 
     img {
       margin: 0.25em;
+    }
+
+    .user-info {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+        
+      img {
+        border-radius: 50%;
+      }
     }
   }
 </style>
