@@ -8,3 +8,17 @@ body {
   margin: 0;
   font-size: 14px;
 }
+
+button {
+  background-color: $main-color;
+  border-radius: 3px;
+  border: 1px solid darken($main-color, 5%);
+  color: #FFFFFF;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: lighten($main-color, 10%);
+  }
+}

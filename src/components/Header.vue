@@ -2,19 +2,35 @@
   <header>
     <img height="20" width="20" src="headerLogo.png" />
     <h1>PR Board</h1>
-    <div class="user-info">
+    <div class="spacer"></div>
+    <div class="user-info" @click="showUserMenu">
       <img :src="currentUser.photoURL" width="32" height="32" />
+      <i class="fa fa-caret-down" aria-hidden="true"></i>
     </div>
+    <user-menu />
   </header>
 </template>
 
 <script>
-  import firebase from 'firebase';
+  import firebaseApp from '../firebase';
+  import UserMenu from './UserMenu';
 
   export default {
+    components: {
+      'user-menu': UserMenu
+    },
     computed: {
       currentUser() {
         return this.$store.state.user || {};
+      }
+    },
+    methods: {
+      signOut() {
+        firebaseApp.auth().signOut(); 
+      },
+      showUserMenu(event) {
+        event.stopPropagation();
+        this.$store.dispatch('showUserMenu');
       }
     }
   };
@@ -42,11 +58,21 @@
       margin: 0.25em;
     }
 
-    .user-info {
+    .spacer {
       flex-grow: 1;
+    }
+
+    .user-info {
       display: flex;
       justify-content: flex-end;
       align-items: center;
+      cursor: pointer;
+
+      padding: 0.25em;
+
+      &:hover {
+        background-color: lighten($main-color, 5%);
+      }
         
       img {
         border-radius: 50%;
