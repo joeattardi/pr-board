@@ -4,6 +4,8 @@
   "description": "View pull requests across multiple GitHub repos",
   "main": "index.js",
   "scripts": {
+    "build": "webpack -p",
+    "lint": "eslint --ext js,vue src",
     "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,6 +24,11 @@
     "babel-loader": "^6.2.10",
     "babel-preset-latest": "^6.22.0",
     "css-loader": "^0.26.1",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-import-resolver-webpack": "^0.8.1",
+    "eslint-plugin-html": "^2.0.0",
+    "eslint-plugin-import": "^2.2.0",
     "file-loader": "^0.10.0",
     "node-sass": "^4.5.0",
     "sass-loader": "^5.0.0",

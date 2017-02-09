@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import UserMenu from './UserMenu';
+  import UserMenu from './UserMenu.vue';
 
   export default {
     components: {

@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 import Vuex from 'vuex';
 import Vue from 'vue';
 

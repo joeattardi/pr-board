@@ -14,10 +14,10 @@
 
   export default {
     methods: {
-      signInGitHub(event) {
-        const provider = new firebase.auth.GithubAuthProvider(); 
-        firebase.auth().signInWithPopup(provider).then(result => {
-          const token = result.credential.accessToken;
+      signInGitHub() {
+        const provider = new firebase.auth.GithubAuthProvider();
+        firebase.auth().signInWithPopup(provider).then((result) => {
+          // const token = result.credential.accessToken;
           createUserRecord(result.user);
         });
       }

@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import LoadingIndicator from './LoadingIndicator';
+  import LoadingIndicator from './LoadingIndicator.vue';
   import { getBoards } from '../firebase';
 
   export default {
@@ -35,7 +35,7 @@
       };
     },
     mounted() {
-      getBoards(this.$store.state.user).then(result => {
+      getBoards(this.$store.state.user).then((result) => {
         this.boards = result;
         this.loading = false;
       });

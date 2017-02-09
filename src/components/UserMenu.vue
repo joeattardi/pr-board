@@ -24,7 +24,7 @@
     },
     methods: {
       signOut() {
-        firebaseApp.auth().signOut(); 
+        firebaseApp.auth().signOut();
       }
     }
   };

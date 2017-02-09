@@ -10,10 +10,8 @@
 </template>
 
 <script>
-  import firebase from 'firebase';
-
-  import Header from './components/Header';
-  import LoginContainer from './components/LoginContainer';
+  import Header from './components/Header.vue';
+  import LoginContainer from './components/LoginContainer.vue';
 
   export default {
     components: {

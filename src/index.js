@@ -6,11 +6,11 @@ import './images/favicon.png';
 import './images/headerLogo.png';
 import './scss/index.scss';
 
-import App from './App';
-import MainView from './components/MainView';
-import AddBoard from './components/AddBoard';
-import PageNotFound from './components/PageNotFound';
-import ViewBoard from './components/ViewBoard';
+import App from './App.vue';
+import MainView from './components/MainView.vue';
+import AddBoard from './components/AddBoard.vue';
+import PageNotFound from './components/PageNotFound.vue';
+import ViewBoard from './components/ViewBoard.vue';
 
 import store from './store/index';
 import firebaseApp from './firebase';
@@ -18,7 +18,7 @@ import firebaseApp from './firebase';
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
-firebaseApp.auth().onAuthStateChanged(user => {
+firebaseApp.auth().onAuthStateChanged((user) => {
   store.dispatch('setUser', user);
 });
 
@@ -31,6 +31,7 @@ const routes = [
 
 const router = new VueRouter({ routes });
 
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,

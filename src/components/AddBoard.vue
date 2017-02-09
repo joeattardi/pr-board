@@ -1,5 +1,9 @@
 <template>
   <div id="add-board-form">
+    <div v-if="boardError" class="error-message">
+      <i class="fa fa-lg fa-times-circle-o" aria-hidden="true"></i>
+      An error occurred while trying to create this board. Please try again.
+    </div>
     <h1>Add New Board</h1>
       <div class="row">
         <label for="boardName">Board name</label>
@@ -37,7 +41,7 @@
 </template>
 
 <script>
-  import LoadingIndicator from './LoadingIndicator';
+  import LoadingIndicator from './LoadingIndicator.vue';
   import { saveBoard } from '../firebase';
   import { getRepo } from '../githubService';
 
@@ -52,7 +56,8 @@
         owner: '',
         repo: '',
         loading: false,
-        repoError: null
+        repoError: null,
+        boardError: null
       };
     },
     computed: {
@@ -69,19 +74,21 @@
       },
       addBoard() {
         saveBoard(this.boardName, this.repos, this.$store.state.user).then(() => {
-          this.$router.push('/'); 
-        }).catch(error => {
-          
+          this.$router.push('/');
+        }).catch(() => {
+          this.boardError = true;
+          this.boardName = '';
+          this.repos = [];
         });
       },
       addRepo() {
         this.loading = true;
-        getRepo(this.owner, this.repo).then(response => {
+        getRepo(this.owner, this.repo).then(() => {
           this.repos.push({ owner: this.owner, name: this.repo });
           this.loading = false;
           this.resetRepoInput();
           this.repoError = null;
-        }).catch(response => {
+        }).catch((response) => {
           if (response.status === 404) {
             this.repoError = `The repository "${this.owner}/${this.repo}" was not found.`;
           } else {
@@ -89,7 +96,7 @@
           }
 
           this.resetRepoInput();
-          this.loading = false; 
+          this.loading = false;
         });
       },
       resetRepoInput() {

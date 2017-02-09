@@ -6,8 +6,8 @@
 </template>
 
 <script>
-  import LoginContainer from './LoginContainer';
-  import MyBoards from './MyBoards';
+  import LoginContainer from './LoginContainer.vue';
+  import MyBoards from './MyBoards.vue';
 
   export default {
     components: {

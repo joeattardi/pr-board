@@ -19,8 +19,8 @@
 
   import { getBoard } from '../firebase';
   import { getPullRequests } from '../githubService';
-  import LoadingIndicator from './LoadingIndicator';
-  import PullRequest from './PullRequest';
+  import LoadingIndicator from './LoadingIndicator.vue';
+  import PullRequest from './PullRequest.vue';
 
   export default {
     components: {
@@ -36,17 +36,17 @@
     },
     methods: {
       loadPullRequests() {
-        Promise.map(this.board.repos, repo => {
-          return getPullRequests(repo.owner, repo.name);
-        }).then(results => {
-          this.pullRequests = results.reduce((finalResult, result) => finalResult.concat(result.body)
+        Promise.map(this.board.repos,
+          repo => getPullRequests(repo.owner, repo.name)).then((results) => {
+            this.pullRequests = results.reduce(
+              (finalResult, result) => finalResult.concat(result.body)
           , []);
-          this.loading = false;
-        });
+            this.loading = false;
+          });
       }
     },
     mounted() {
-      getBoard(this.$route.params.id).then(board => {
+      getBoard(this.$route.params.id).then((board) => {
         this.board = board;
         this.loadPullRequests();
       });

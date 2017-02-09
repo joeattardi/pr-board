@@ -11,17 +11,15 @@ const firebaseApp = firebase.initializeApp({
 });
 
 export function getUserRecord(user) {
-  return firebaseApp.database().ref(`/users/${user.uid}`).once('value').then(snapshot => {
-    return snapshot.val(); 
-  });
+  return firebaseApp.database().ref(`/users/${user.uid}`).once('value').then(snapshot => snapshot.val());
 }
 
 export function createUserRecord(user) {
-  return getUserRecord(user).then(userRecord => {
+  return getUserRecord(user).then((userRecord) => {
     if (userRecord === null) {
       return firebaseApp.database().ref(`/users/${user.uid}`).set({
         boards: []
-      }); 
+      });
     }
 
     return userRecord;
@@ -29,9 +27,7 @@ export function createUserRecord(user) {
 }
 
 export function getBoard(id) {
-  return firebaseApp.database().ref(`/boards/${id}`).once('value').then(snapshot => {
-    return snapshot.val();
-  });
+  return firebaseApp.database().ref(`/boards/${id}`).once('value').then(snapshot => snapshot.val());
 }
 
 export function saveBoard(name, repos, user) {
@@ -45,11 +41,11 @@ export function saveBoard(name, repos, user) {
   }).then(() => {
     const userBoardsRef = database.ref(`/users/${user.uid}/boards`);
     return userBoardsRef.once('value');
-  }).then(snapshot => {
+  }).then((snapshot) => {
     let boards = snapshot.val();
     if (!boards) {
       boards = [];
-    } 
+    }
 
     boards.push(key);
     return database.ref(`/users/${user.uid}/boards`).set(boards);
@@ -58,14 +54,12 @@ export function saveBoard(name, repos, user) {
 
 export function getBoards(user) {
   const database = firebaseApp.database();
-  return database.ref(`/users/${user.uid}/boards`).once('value').then(snapshot => {
+  return database.ref(`/users/${user.uid}/boards`).once('value').then((snapshot) => {
     const boardIds = snapshot.val() || [];
     const boards = [];
 
-    return Promise.map(boardIds, boardId => database.ref(`/boards/${boardId}`).once('value')).then(snapshots => {
-      snapshots.forEach(snapshot => {
-        boards.push(snapshot.val());
-      });
+    return Promise.map(boardIds, boardId => database.ref(`/boards/${boardId}`).once('value')).then((snapshots) => {
+      snapshots.forEach(boardSnapshot => boards.push(boardSnapshot.val()));
 
       return boards;
     });
