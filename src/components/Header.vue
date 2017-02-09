@@ -1,7 +1,7 @@
 <template>
   <header>
     <router-link to="/">
-      <img height="20" width="20" src="headerLogo.png" />
+      <img height="20" src="headerLogo.png" />
       <h1>PR Board</h1>
     </router-link>
     <div class="spacer"></div>
