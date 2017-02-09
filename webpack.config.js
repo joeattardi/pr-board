@@ -5,7 +5,8 @@ module.exports = {
   entry: './src/index.js',
 
   output: {
-    filename: 'public/bundle.js'
+    path: path.join(__dirname, 'public'),
+    filename: 'bundle.js'
   },
 
   module: {
@@ -27,13 +28,13 @@ module.exports = {
       {
         test: /\.png$/,
         exclude: path.resolve(__dirname, 'node_modules'),
-        loader: 'file-loader?name=[name].[ext]&outputPath=public/'
+        loader: 'file-loader?name=[name].[ext]'
       }
     ]
   },
 
   devServer: {
-    contentBase: path.join(__dirname, 'public') 
+    contentBase: path.join(__dirname, 'public'),
   },
 
   resolve: {
