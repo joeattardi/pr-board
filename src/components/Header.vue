@@ -5,10 +5,6 @@
       <h1>PR Board</h1>
     </router-link>
     <div class="spacer"></div>
-    <div v-if="loggedIn">
-      My Boards
-      <i class="fa fa-caret-down" aria-hidden="true"></i>
-    </div>
     <div v-if="loggedIn" class="user-info" @click="showUserMenu">
       <img :src="currentUser.photoURL" width="32" height="32" />
       <i class="fa fa-caret-down" aria-hidden="true"></i>

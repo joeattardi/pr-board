@@ -14,7 +14,7 @@
         <form>
           <ul id="repos">
             <li class="repo-item" v-for="(repo, index) in repos">
-              <i class="fa fa-lg fa-github" aria-hidden="true"></i>
+              <img src="icons/repo.svg" />
               {{ repo.owner }}/{{ repo.name }}
               <i title="Delete" @click="deleteRepo(index)" class="fa fa-times" aria-hidden="true"></i>
             </li>
@@ -116,6 +116,14 @@
 
 <style lang="sass">
   #add-board-form {
+    padding: 0.5em;
+
+    .repo-item {
+      img {
+        vertical-align: middle;
+      }
+    }
+
     div.row {
       margin: 1em;
     }

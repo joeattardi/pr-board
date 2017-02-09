@@ -1,24 +1,33 @@
 <template>
   <div class="pull-request">
     <img class="avatar" :src="pullRequest.user.avatar_url" :title="pullRequest.user.login" />
-    <div class="pull-request-info">
+    <div class="pr-info">
       <h3>
         <a target="_blank" :href="pullRequest.html_url">
+          <img src="icons/git-pull-request.svg" /> 
           {{ pullRequest.title }}
         </a>
       </h3>
       <div>
-        <a target="_blank" :href="pullRequest.base.repo.html_url">{{ pullRequest.base.repo.full_name }}</a>
+        <a target="_blank" :href="pullRequest.base.repo.html_url">
+          <img src="icons/repo.svg" />
+          {{ pullRequest.base.repo.full_name }}
+        </a>
         <span class="pr-number">#{{ pullRequest.number }}</span>
       </div>
-      <div>
-        Created {{ relativeCreatedTime }}
+      <div class="pr-created" :title="pullRequest.created_at">
+        Opened by {{ pullRequest.user.login }} {{ relativeCreatedTime }}
       </div>
+    </div>
+    <div class="pr-updated" :title="'Last updated ' + pullRequest.updated_at">
+      {{ relativeUpdatedTime }} 
     </div>
   </div>
 </template>
 
 <script>
+  import '../icons/repo.svg';
+  import '../icons/git-pull-request.svg';
   import moment from 'moment';
 
   export default {
@@ -31,6 +40,9 @@
     computed: {
       relativeCreatedTime() {
         return moment(this.pullRequest.created_at).from(moment());
+      },
+      relativeUpdatedTime() {
+        return moment(this.pullRequest.updated_at).from(moment());
       }
     }
   };
@@ -50,6 +62,29 @@
 
     .pr-number {
       color: #AAAAAA;
+    }
+
+    .pr-created {
+      font-size: 0.8em;
+    }
+
+    .pr-updated {
+      align-self: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      background-color: #B28438;
+      color: #FFFFFF;
+      padding: 0.5em;
+      border-radius: 5px; 
+      box-shadow: 1px 1px 1px #654A20;
+    }
+
+    .pr-info {
+      flex-grow: 1;
+
+      img {
+        vertical-align: middle;
+      }
     }
 
     .avatar {

@@ -29,6 +29,10 @@ module.exports = {
         test: /\.png$/,
         exclude: path.resolve(__dirname, 'node_modules'),
         loader: 'file-loader?name=[name].[ext]'
+      },
+      {
+        test: /\.svg$/,
+        loader: 'file-loader?name=[name].[ext]&outputPath=icons/'
       }
     ]
   },

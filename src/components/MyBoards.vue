@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="my-boards-container">
     <h1>My Boards</h1>
     <button @click.prevent="addBoard">
       <i class="fa fa-plus" aria-hidden="true"></i>
@@ -54,6 +54,10 @@
 
 <style lang="sass">
   @import '../scss/variables';
+
+  #my-boards-container {
+    padding: 0.5em;
+  }
 
   #boards {
     padding: 0.5em;

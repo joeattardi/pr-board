@@ -29,10 +29,6 @@
 <style lang="sass">
   #content-container {
     height: 100vh;
-
-    #content-body {
-      padding: 0.5em;
-    }
   }
 
   .fade-enter, .fade-leave-to {
