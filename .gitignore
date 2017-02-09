@@ -1,3 +1,6 @@
+public/bundle.js
+public/*.png
 dist
 node_modules
 *.env
+npm-debug.log
