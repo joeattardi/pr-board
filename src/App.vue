@@ -2,7 +2,9 @@
   <div id="content-container" @click="hideUserMenu">
     <app-header />
     <div id="content-body">
-      <router-view />
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
@@ -34,4 +36,17 @@
       padding: 0.5em;
     }
   }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 0.2s;
+  }
+
+  .fade-leave {
+    opacity: 1;
+  }
+
 </style>
