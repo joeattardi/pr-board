@@ -31,5 +31,9 @@
     text-align: center;
     width: 30em;
     margin: 10em auto;
+
+    button {
+      padding: 1em;
+    }
   }
 </style>

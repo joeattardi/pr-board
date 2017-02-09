@@ -9,6 +9,17 @@ body {
   font-size: 14px;
 }
 
+input {
+  border: 1px solid #CCCCCC;
+  border-radius: 2px;
+  outline: none;
+  padding: 0.25em;
+
+  &:focus {
+    border: 1px solid #000000;
+  }
+}
+
 button {
   background-color: $main-color;
   border-radius: 3px;
@@ -21,4 +32,20 @@ button {
   &:hover {
     background-color: lighten($main-color, 10%);
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+
+    &:hover {
+      background-color: $main-color;
+    }
+  }
+}
+
+.error-message {
+  background-color: $error-background-color;
+  border: 1px solid darken($error-background-color, 5%);
+  color: $error-color;
+  padding: 0.5em;
 }

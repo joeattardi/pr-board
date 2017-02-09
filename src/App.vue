@@ -2,7 +2,7 @@
   <div id="content-container" @click="hideUserMenu">
     <app-header />
     <div id="content-body">
-      <login-container v-if="!loggedIn" />
+      <router-view />
     </div>
   </div>
 </template>
@@ -18,21 +18,10 @@
       'app-header': Header,
       'login-container': LoginContainer
     },
-    computed: {
-      loggedIn() {
-        return this.$store.state.user != null;
-      }
-    },
     methods: {
       hideUserMenu() {
         this.$store.dispatch('hideUserMenu');
       },
-      signInGitHub(event) {
-        const provider = new firebase.auth.GithubAuthProvider(); 
-        firebase.auth().signInWithPopup(provider).then(result => {
-          const token = result.credential.accessToken;
-        });
-      }
     }
   };
 </script>

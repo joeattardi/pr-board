@@ -1,7 +1,9 @@
 <template>
   <header>
-    <img height="20" width="20" src="headerLogo.png" />
-    <h1>PR Board</h1>
+    <router-link to="/">
+      <img height="20" width="20" src="headerLogo.png" />
+      <h1>PR Board</h1>
+    </router-link>
     <div class="spacer"></div>
     <div v-if="loggedIn" class="user-info" @click="showUserMenu">
       <img :src="currentUser.photoURL" width="32" height="32" />
@@ -47,6 +49,12 @@
     color: #FFFFFF;
     display: flex;
     align-items: center;
+
+    a {
+      color: #FFFFFF;
+      text-decoration: none;
+      display: flex;
+    }
 
     h1 {
       margin: 0;
