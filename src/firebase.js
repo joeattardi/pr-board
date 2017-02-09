@@ -28,10 +28,17 @@ export function createUserRecord(user) {
   });
 }
 
+export function getBoard(id) {
+  return firebaseApp.database().ref(`/boards/${id}`).once('value').then(snapshot => {
+    return snapshot.val();
+  });
+}
+
 export function saveBoard(name, repos, user) {
   const database = firebaseApp.database();
   const key = database.ref().child('boards').push().key;
   return database.ref(`/boards/${key}`).set({
+    id: key,
     name,
     repos,
     owner: user.uid

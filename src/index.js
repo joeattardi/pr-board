@@ -10,6 +10,7 @@ import App from './App';
 import MainView from './components/MainView';
 import AddBoard from './components/AddBoard';
 import PageNotFound from './components/PageNotFound';
+import ViewBoard from './components/ViewBoard';
 
 import store from './store/index';
 import firebaseApp from './firebase';
@@ -24,6 +25,7 @@ firebaseApp.auth().onAuthStateChanged(user => {
 const routes = [
   { path: '/', component: MainView },
   { path: '/boards/new', component: AddBoard },
+  { path: '/boards/:id', component: ViewBoard },
   { path: '*', component: PageNotFound }
 ];
 

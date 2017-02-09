@@ -6,7 +6,7 @@
       Add New Board
     </button>
     <div v-if="!loading" id="boards">
-      <div class="board" v-for="board in boards">
+      <div @click="goToBoard(board)" class="board" v-for="board in boards">
         <h2>
           <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
           {{ board.name }}
@@ -43,6 +43,9 @@
     methods: {
       addBoard() {
         this.$router.push('/boards/new');
+      },
+      goToBoard(board) {
+        this.$router.push(`/boards/${board.id}`);
       }
     }
   };
