@@ -26,7 +26,7 @@
           <button v-else disabled><loading-indicator /></button>
         </form>
         <br />
-        <button :disabled="!valid">
+        <button @click="addBoard" :disabled="!valid">
           Create Board
         </button>
         <button @click.prevent="cancel">
@@ -38,6 +38,7 @@
 
 <script>
   import LoadingIndicator from './LoadingIndicator';
+  import { saveBoard } from '../firebase';
   import { getRepo } from '../githubService';
 
   export default {
@@ -65,6 +66,13 @@
     methods: {
       cancel() {
         this.$router.push('/');
+      },
+      addBoard() {
+        saveBoard(this.boardName, this.repos, this.$store.state.user).then(() => {
+          this.$router.push('/'); 
+        }).catch(error => {
+          
+        });
       },
       addRepo() {
         this.loading = true;

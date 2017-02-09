@@ -5,11 +5,32 @@
       <i class="fa fa-plus" aria-hidden="true"></i>
       Add New Board
     </button>
+    <div id="boards">
+      <div class="board" v-for="board in boards">
+        <h2>
+          <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+          {{ board.name }}
+        </h2>
+        {{ board.repos.length }} {{ board.repos.length === 1 ? 'repository' : 'repositories' }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+  import { getBoards } from '../firebase';
+
   export default {
+    data() {
+      return {
+        boards: []
+      };
+    },
+    mounted() {
+      getBoards(this.$store.state.user).then(result => {
+        this.boards = result;
+      });
+    },
     methods: {
       addBoard() {
         this.$router.push('/boards/new');
@@ -17,3 +38,27 @@
     }
   };
 </script>
+
+<style lang="sass">
+  @import '../scss/variables';
+
+  #boards {
+    padding: 0.5em;
+    display: flex;
+
+    .board {
+      background-color: lighten($main-color, 50%);
+      border: 1px solid #999999;
+      border-radius: 5px;
+      margin: 0.5em;
+      padding: 0.5em;
+      box-shadow: 2px 2px 2px #666666;    
+      cursor: pointer;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+</style>

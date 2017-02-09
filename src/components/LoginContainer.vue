@@ -10,6 +10,7 @@
 
 <script>
   import firebase from 'firebase';
+  import { createUserRecord } from '../firebase';
 
   export default {
     methods: {
@@ -17,6 +18,7 @@
         const provider = new firebase.auth.GithubAuthProvider(); 
         firebase.auth().signInWithPopup(provider).then(result => {
           const token = result.credential.accessToken;
+          createUserRecord(result.user);
         });
       }
     }
