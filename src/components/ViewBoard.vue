@@ -5,7 +5,16 @@
     </div>
     <div v-else>
       <div class="board-header">
-        <h1>{{ board.name }}</h1>
+          <h1>{{ board.name }}</h1>
+          <div class="pr-count" :title="pullRequests.length + ' open pull requests'">
+            <img src="icons/git-pull-request.svg" />
+            <span>{{ pullRequests.length }}</span>
+          </div>
+          <div class="repo-count" :title="board.repos.length + ' repositories in this board'">
+            <img src="icons/repo.svg" />
+            <span>{{ board.repos.length }}</span>
+          </div>
+          <pull-request-toolbar />
       </div>
       <div v-if="loadError" class="error-message">
         <i class="fa fa-lg fa-times-circle-o" aria-hidden="true"></i>
@@ -27,11 +36,13 @@
   import { getPullRequests } from '../githubService';
   import LoadingIndicator from './LoadingIndicator.vue';
   import PullRequest from './PullRequest.vue';
+  import PullRequestToolbar from './PullRequestToolbar.vue';
 
   export default {
     components: {
       LoadingIndicator,
-      PullRequest
+      PullRequest,
+      PullRequestToolbar
     },
     data() {
       return {
@@ -73,15 +84,38 @@
 
 <style lang="sass">
   #board-view {
-    h1 {
-      margin: 0;
-    }
 
     .board-header {
       padding: 0.5em;
       background-color: #EEEEEE;
       border-bottom: 1px solid #999999;
       box-shadow: 1px 1px 10px #666666;
+      display: flex;
+
+      h1 {
+        margin: 0;
+        margin-right: 1em;
+        font-size: 1.5em;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 1em;
+      }
+
+      .pr-count, .repo-count {
+        align-self: center;
+        margin-right: 1em;
+
+        span {
+          vertical-align: middle;
+        }
+
+        img {
+          vertical-align: middle;
+        }
+      }
+
     }
 
     .error-message {

@@ -25,6 +25,7 @@
     methods: {
       signOut() {
         firebaseApp.auth().signOut();
+        this.$router.push('/');
       }
     }
   };
