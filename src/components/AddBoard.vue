@@ -43,7 +43,7 @@
 
   export default {
     components: {
-      'loading-indicator': LoadingIndicator
+      LoadingIndicator
     },
     data() {
       return {

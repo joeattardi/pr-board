@@ -11,8 +11,8 @@
 
   export default {
     components: {
-      'login-container': LoginContainer,
-      'my-boards': MyBoards
+      LoginContainer,
+      MyBoards
     },
     computed: {
       loggedIn() {
