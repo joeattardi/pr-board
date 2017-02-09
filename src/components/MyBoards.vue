@@ -35,6 +35,7 @@
       };
     },
     mounted() {
+      document.title = 'My Boards: PR Board';
       getBoards(this.$store.state.user).then((result) => {
         this.boards = result;
         this.loading = false;

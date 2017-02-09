@@ -5,6 +5,7 @@
     </div>
     <div v-else>
       <h1>{{ board.name }}</h1>
+      <h2>{{ pullRequests.length }} Open Pull Requests</h2>
       <div id="pull-requests">
         <div v-for="pullRequest in pullRequests">
           <pull-request :pullRequest="pullRequest" />
@@ -42,6 +43,7 @@
               (finalResult, result) => finalResult.concat(result.body)
           , []);
             this.loading = false;
+            document.title = `${this.board.name}: PR Board`;
           });
       }
     },

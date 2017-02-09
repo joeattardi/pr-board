@@ -49,6 +49,9 @@
     components: {
       LoadingIndicator
     },
+    mounted() {
+      document.title = 'Add New Board: PR Board';
+    },
     data() {
       return {
         boardName: '',
