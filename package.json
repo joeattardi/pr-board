@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.7",
+    "color": "^1.0.3",
     "firebase": "^3.6.9",
     "vue": "^2.1.10",
     "vue-resource": "^1.2.0",

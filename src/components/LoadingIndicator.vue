@@ -1,6 +1,33 @@
 <template>
-  <div class="loader"></div>
+  <div class="loader" :style="style"></div>
 </template>
+
+<script>
+  import Color from 'color';
+  export default {
+    props: {
+      color: {
+        type: String,
+        default: '#FFFFFF'
+      },
+      size: {
+        type: String,
+        default: '2px'
+      }
+    },
+    computed: {
+      style() {
+        return {
+          borderTopColor: Color(this.color).alpha(0.2),
+          borderRightColor: Color(this.color).alpha(0.2),
+          borderBottomColor: Color(this.color).alpha(0.2),
+          borderLeftColor: this.color,
+          fontSize: this.size
+        };
+      }
+    }
+  };
+</script>
 
 <style lang="sass">
   .loader,
