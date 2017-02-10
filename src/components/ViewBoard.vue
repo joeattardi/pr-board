@@ -1,21 +1,21 @@
 <template>
   <div id="board-view">
+    <div class="board-header">
+        <h1>{{ board.name }}</h1>
+        <div class="pr-count" :title="pullRequests.length + ' open pull requests'">
+          <img src="icons/git-pull-request.svg" />
+          <span>{{ pullRequests.length }}</span>
+        </div>
+        <div class="repo-count" :title="board.repos.length + ' repositories in this board'">
+          <img src="icons/repo.svg" />
+          <span>{{ board.repos.length }}</span>
+        </div>
+        <board-toolbar :onRefresh="refresh"/>
+    </div>
     <div v-if="loading" style="text-align: center;">
       <loading-indicator color="#000000" size="10px" />
     </div>
     <div v-else>
-      <div class="board-header">
-          <h1>{{ board.name }}</h1>
-          <div class="pr-count" :title="pullRequests.length + ' open pull requests'">
-            <img src="icons/git-pull-request.svg" />
-            <span>{{ pullRequests.length }}</span>
-          </div>
-          <div class="repo-count" :title="board.repos.length + ' repositories in this board'">
-            <img src="icons/repo.svg" />
-            <span>{{ board.repos.length }}</span>
-          </div>
-          <pull-request-toolbar />
-      </div>
       <div v-if="loadError" class="error-message">
         <i class="fa fa-lg fa-times-circle-o" aria-hidden="true"></i>
         {{ loadError }}
@@ -36,23 +36,29 @@
   import { getPullRequests } from '../githubService';
   import LoadingIndicator from './LoadingIndicator.vue';
   import PullRequest from './PullRequest.vue';
-  import PullRequestToolbar from './PullRequestToolbar.vue';
+  import BoardToolbar from './BoardToolbar.vue';
 
   export default {
     components: {
       LoadingIndicator,
       PullRequest,
-      PullRequestToolbar
+      BoardToolbar
     },
     data() {
       return {
         loading: true,
         loadError: null,
-        board: null,
+        board: {
+          repos: [] 
+        },
         pullRequests: []
       };
     },
     methods: {
+      refresh() {
+        this.loading = true;
+        this.loadPullRequests();
+      },
       loadPullRequests() {
         Promise.map(this.board.repos,
           repo => getPullRequests(repo.owner, repo.name)).then((results) => {
