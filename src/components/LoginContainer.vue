@@ -12,8 +12,9 @@
 </template>
 
 <script>
-  import '../images/screenshot.png';
   import firebase from 'firebase';
+
+  import '../images/screenshot.png';
   import { createUserRecord } from '../firebase';
 
   export default {

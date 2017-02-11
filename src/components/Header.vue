@@ -49,6 +49,8 @@
     color: #FFFFFF;
     display: flex;
     align-items: center;
+    min-height: 54px;
+    max-height: 54px;
 
     a {
       color: #FFFFFF;

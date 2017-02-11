@@ -26,9 +26,10 @@
 </template>
 
 <script>
+  import moment from 'moment';
+
   import '../icons/repo.svg';
   import '../icons/git-pull-request.svg';
-  import moment from 'moment';
 
   export default {
     props: {

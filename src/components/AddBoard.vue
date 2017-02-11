@@ -13,7 +13,6 @@
   import BoardEditor from './BoardEditor.vue';
   import LoadingIndicator from './LoadingIndicator.vue';
   import { addBoard } from '../firebase';
-  import { getRepo } from '../githubService';
 
   export default {
     components: {
@@ -37,7 +36,7 @@
         addBoard(boardName, repos, this.$store.state.user).then(() => {
           this.$router.push('/');
         }).catch(() => {
-          this.boardError = `An error occurred while trying to create the board "${boardName}". Please try again.`; 
+          this.boardError = `An error occurred while trying to create the board "${boardName}". Please try again.`;
         });
       }
     }

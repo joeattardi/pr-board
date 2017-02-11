@@ -7,7 +7,7 @@ const GITHUB_BASE_URL = 'https://api.github.com';
 function apiRequest(url) {
   return Vue.http.get(url, {
     headers: {
-      'Authorization': `token ${store.state.accessToken}`
+      Authorization: `token ${store.state.accessToken}`
     }
   });
 }

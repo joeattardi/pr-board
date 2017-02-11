@@ -39,7 +39,7 @@
         this.clearInterval();
 
         if (newEnabled) {
-           this.interval = setInterval(this.onRefresh, this.autoRefreshInterval * 1000 * 60); 
+          this.interval = setInterval(this.onRefresh, this.autoRefreshInterval * 1000 * 60);
         }
       }
     },

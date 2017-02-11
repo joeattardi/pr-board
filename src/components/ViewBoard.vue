@@ -49,7 +49,7 @@
         loading: true,
         loadError: null,
         board: {
-          repos: [] 
+          repos: []
         },
         pullRequests: []
       };

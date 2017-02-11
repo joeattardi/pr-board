@@ -6,16 +6,19 @@
         <router-view />
       </transition>
     </div>
+    <app-footer />
   </div>
 </template>
 
 <script>
   import Header from './components/Header.vue';
+  import Footer from './components/Footer.vue';
   import LoginContainer from './components/LoginContainer.vue';
 
   export default {
     components: {
       'app-header': Header,
+      'app-footer': Footer,
       'login-container': LoginContainer
     },
     methods: {
@@ -29,6 +32,12 @@
 <style lang="sass">
   #content-container {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    #content-body {
+      flex-grow: 1;
+    }
   }
 
   .fade-enter, .fade-leave-to {

@@ -7,6 +7,9 @@ module.exports = {
     "rules": {
       "comma-dangle": 0
     },
+    "env": {
+      "browser": true
+    },
     "globals": {
       "FIREBASE_API_KEY": false,
       "FIREBASE_AUTH_DOMAIN": false,

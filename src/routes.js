@@ -7,7 +7,6 @@ import store from './store/index';
 
 function checkForLogin(to, from, next) {
   if (!store.state.user) {
-    console.log('redirecting to login');
     next('/');
   } else {
     next();
@@ -16,12 +15,12 @@ function checkForLogin(to, from, next) {
 
 export default [
   { path: '/', component: MainView },
-  { 
+  {
     path: '/boards/new',
     component: AddBoard,
     beforeEnter: checkForLogin
   },
-  { 
+  {
     path: '/boards/:id',
     component: ViewBoard,
     beforeEnter: checkForLogin

@@ -19,18 +19,18 @@ export function getAccessToken(user) {
 }
 
 export function createUserRecord(user, accessToken) {
-  return getUserRecord(user).then((userRecord) => {
-    return firebaseApp.database().ref(`/users/${user.uid}`).update({
+  return getUserRecord(user).then(() =>
+    firebaseApp.database().ref(`/users/${user.uid}`).update({
       accessToken
-    });
-  });
+    })
+  );
 }
 
 export function deleteBoard(user, id) {
   const database = firebaseApp.database();
-  return database.ref(`/boards/${id}`).remove().then(() => {
-    return database.ref(`users/${user.uid}/boards`).once('value');
-  }).then(snapshot => {
+  return database.ref(`/boards/${id}`).remove().then(() =>
+    database.ref(`users/${user.uid}/boards`).once('value')
+  ).then((snapshot) => {
     let boards = snapshot.val();
     if (!boards) {
       boards = [];
@@ -47,7 +47,7 @@ export function getBoard(id) {
 
 export function saveBoard(id, name, repos) {
   const database = firebaseApp.database();
-  
+
   return database.ref(`/boards/${id}`).update({
     name,
     repos
