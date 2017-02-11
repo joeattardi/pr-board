@@ -1,5 +1,8 @@
 <template>
   <div id="login-container">
+    <h1>View pull requests across multiple GitHub repositories.</h1>
+    <img src="screenshot.png" />
+
     <h2>To get started, sign in with your GitHub account.</h2>
     <button @click.prevent="signInGitHub">
       <i class="fa fa-lg fa-github" aria-hidden="true"></i>
@@ -9,6 +12,7 @@
 </template>
 
 <script>
+  import '../images/screenshot.png';
   import firebase from 'firebase';
   import { createUserRecord } from '../firebase';
 
@@ -30,8 +34,14 @@
     border: 1px solid #AAAAAA;
     padding: 1em;
     text-align: center;
-    width: 30em;
-    margin: 10em auto;
+    width: 50em;
+    margin: 5em auto;
+    background-color: #EEEEEE;
+    box-shadow: 1px 1px 1px #666666;
+
+    img {
+      width: 47em;
+    }
 
     button {
       padding: 1em;
