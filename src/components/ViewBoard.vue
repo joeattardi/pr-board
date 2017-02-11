@@ -10,7 +10,7 @@
           <img src="icons/repo.svg" />
           <span>{{ board.repos.length }}</span>
         </div>
-        <board-toolbar :onRefresh="refresh"/>
+        <board-toolbar :onRefresh="refresh" :onEdit="edit" />
     </div>
     <div v-if="loading" style="text-align: center;">
       <loading-indicator color="#000000" size="10px" />
@@ -55,6 +55,9 @@
       };
     },
     methods: {
+      edit() {
+        this.$router.push(`/boards/${this.$route.params.id}/edit`);
+      },
       refresh() {
         this.loading = true;
         this.loadPullRequests();

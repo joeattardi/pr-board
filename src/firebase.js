@@ -26,11 +26,35 @@ export function createUserRecord(user, accessToken) {
   });
 }
 
+export function deleteBoard(user, id) {
+  const database = firebaseApp.database();
+  return database.ref(`/boards/${id}`).remove().then(() => {
+    return database.ref(`users/${user.uid}/boards`).once('value');
+  }).then(snapshot => {
+    let boards = snapshot.val();
+    if (!boards) {
+      boards = [];
+    }
+
+    boards = boards.filter(board => board !== id);
+    return database.ref(`/users/${user.uid}/boards`).set(boards);
+  });
+}
+
 export function getBoard(id) {
   return firebaseApp.database().ref(`/boards/${id}`).once('value').then(snapshot => snapshot.val());
 }
 
-export function saveBoard(name, repos, user) {
+export function saveBoard(id, name, repos) {
+  const database = firebaseApp.database();
+  
+  return database.ref(`/boards/${id}`).update({
+    name,
+    repos
+  });
+}
+
+export function addBoard(name, repos, user) {
   const database = firebaseApp.database();
   const key = database.ref().child('boards').push().key;
   return database.ref(`/boards/${key}`).set({

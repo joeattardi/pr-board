@@ -41,6 +41,15 @@ button {
       background-color: $main-color;
     }
   }
+
+  &.delete-button {
+    background-color: $delete-color;
+    border-color: darken($delete-color, 5%);
+
+    &:hover {
+      background-color: lighten($delete-color, 10%);
+    }
+  }
 }
 
 .error-message {

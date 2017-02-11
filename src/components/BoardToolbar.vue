@@ -2,23 +2,27 @@
   <div class="toolbar">
     <auto-refresh-control :onRefresh="onRefresh" />
     <refresh-button :onRefresh="onRefresh" />
-    <button title="Board Settings">
-      <i class="fa fa-cog"></i>
-    </button>
+    <edit-button :onEdit="onEdit" />
   </div>
 </template>
 
 <script>
   import AutoRefreshControl from './AutoRefreshControl.vue';
   import RefreshButton from './RefreshButton.vue';
+  import EditButton from './EditButton.vue';
 
   export default {
     components: {
       AutoRefreshControl,
-      RefreshButton
+      RefreshButton,
+      EditButton
     },
     props: {
       onRefresh: {
+        type: Function,
+        required: true
+      },
+      onEdit: {
         type: Function,
         required: true
       }
