@@ -11,11 +11,16 @@ export default new Vuex.Store({
   actions,
   state: {
     user: null,
+    accessToken: null,
     showUserMenu: false
   },
   mutations: {
     setUser(state, user) {
       state.user = user;
+    },
+
+    setAccessToken(state, accessToken) {
+      state.accessToken = accessToken;
     },
 
     showUserMenu(state) {

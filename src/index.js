@@ -11,12 +11,18 @@ import App from './App.vue';
 import routes from './routes';
 import store from './store/index';
 import firebaseApp from './firebase';
+import { getAccessToken } from './firebase';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
 firebaseApp.auth().onAuthStateChanged((user) => {
   store.dispatch('setUser', user);
+  if (user) {
+    getAccessToken(user).then(token => {
+      store.dispatch('setAccessToken', token);
+    });    
+  }
 });
 
 const router = new VueRouter({ routes });

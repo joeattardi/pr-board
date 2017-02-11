@@ -14,15 +14,15 @@ export function getUserRecord(user) {
   return firebaseApp.database().ref(`/users/${user.uid}`).once('value').then(snapshot => snapshot.val());
 }
 
-export function createUserRecord(user) {
-  return getUserRecord(user).then((userRecord) => {
-    if (userRecord === null) {
-      return firebaseApp.database().ref(`/users/${user.uid}`).set({
-        boards: []
-      });
-    }
+export function getAccessToken(user) {
+  return firebaseApp.database().ref(`/users/${user.uid}/accessToken`).once('value').then(snapshot => snapshot.val());
+}
 
-    return userRecord;
+export function createUserRecord(user, accessToken) {
+  return getUserRecord(user).then((userRecord) => {
+    return firebaseApp.database().ref(`/users/${user.uid}`).update({
+      accessToken
+    });
   });
 }
 

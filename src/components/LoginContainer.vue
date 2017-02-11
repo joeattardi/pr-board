@@ -17,8 +17,7 @@
       signInGitHub() {
         const provider = new firebase.auth.GithubAuthProvider();
         firebase.auth().signInWithPopup(provider).then((result) => {
-          // const token = result.credential.accessToken;
-          createUserRecord(result.user);
+          createUserRecord(result.user, result.credential.accessToken);
         });
       }
     }
