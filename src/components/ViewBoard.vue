@@ -34,7 +34,7 @@
   import _ from 'lodash';
 
   import { getBoard } from '../firebase';
-  import { getPullRequests, getPullRequestDetails } from '../githubService';
+  import { apiRequest, getPullRequests, getPullRequestDetails } from '../githubService';
   import LoadingIndicator from './LoadingIndicator.vue';
   import PullRequest from './PullRequest.vue';
   import BoardToolbar from './BoardToolbar.vue';
@@ -70,13 +70,16 @@
         pullRequests.sort((a, b) => b.updated_at.localeCompare(a.updated_at));
         this.pullRequests = pullRequests;
         document.title = `${this.board.name}: PR Board`;
-        return Promise.map(pullRequests, pr => getPullRequestDetails(pr.base.repo.full_name, pr.number));
+        return Promise.map(pullRequests, pr => getPullRequestDetails(pr.base.repo.full_name, pr.number)
+          .then((result) => {
+            _.assign(pr, result.body);
+          }));
       },
-      assignPullRequestDetails(prDetails) {
-        const idToPRMap = {};
-        prDetails.forEach((prDetail) => idToPRMap[prDetail.id] = prDetail);
-        this.pullRequests.forEach((pullRequest) => {
-          _.assign(pullRequest, idToPRMap[pullRequest.id]);
+      getStatuses() {
+        return Promise.map(this.pullRequests, (pr) => {
+          return apiRequest(pr.statuses_url).then((statusResponse) => {
+            pr.statuses = statusResponse.body;
+          });
         });
       },
       handleError(result) {
@@ -89,8 +92,7 @@
       loadPullRequests() {
         Promise.map(this.board.repos,
           repo => getPullRequests(repo.owner, repo.name)).then(this.handlePullRequestResults)
-          .then(prResponses => prResponses.map(response => response.body))
-          .then(this.assignPullRequestDetails)
+          .then(this.getStatuses)
           .catch(this.handleError)
           .finally(() => this.loading = false);
       }

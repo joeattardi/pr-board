@@ -1,5 +1,5 @@
 <template>
-  <div class="pull-request">
+  <div class="pull-request" :class="statusClass">
     <img class="avatar" :src="pullRequest.user.avatar_url" :title="pullRequest.user.login" />
     <div class="pr-info">
       <h3>
@@ -18,6 +18,25 @@
           <i class="fa fa-comment" aria-hidden="true"></i>
           {{ pullRequest.comments }}
         </span>
+        <span class="pr-mergeable" v-if="pullRequest.mergeable" title="Mergeable">
+          <img src="icons/git-merge.svg" />
+        </span>
+        <span class="pr-commits" title="pullRequest.commits + ' commits'">
+          <img src="icons/git-commit.svg" />
+          {{ pullRequest.commits }}
+        </span>
+        <span class="pr-additions" title="pullRequest.additions + ' additions'">
+          <span style="color: green;">
+           <i class="fa fa-plus" aria-hidden="true"></i>  
+          </span>
+          {{ pullRequest.additions }}
+        </span>
+        <span class="pr-deletions" title="pullRequest.deletions + ' deletions'">
+          <span style="color: red;">
+            <i class="fa fa-minus" aria-hidden="true"></i>
+          </span>
+          {{ pullRequest.deletions }}
+        </span>
       </div>
       <div class="pr-created" :title="pullRequest.created_at">
         Opened by {{ pullRequest.user.login }} {{ relativeCreatedTime }}
@@ -32,6 +51,8 @@
 <script>
   import moment from 'moment';
 
+  import '../icons/git-commit.svg';
+  import '../icons/git-merge.svg';
   import '../icons/repo.svg';
   import '../icons/git-pull-request.svg';
 
@@ -43,6 +64,9 @@
       }
     },
     computed: {
+      statusClass() {
+        return this.pullRequest.statuses.length > 0 ? `status status-${this.pullRequest.statuses[0].state}` : 'status';
+      },
       relativeCreatedTime() {
         return moment(this.pullRequest.created_at).from(moment());
       },
@@ -65,11 +89,66 @@
     display: flex;
     box-shadow: 2px 2px 2px #AAAAAA;
 
+    &.status {
+      &:before {
+        font-family: FontAwesome;
+        content: "\f00c";
+        color: #FFFFFF;
+        position: absolute;
+        align-self: center;
+        margin-left: -30px;
+      }
+    }
+
+    &.status-success {
+      border-color: $pr-success-color;
+      border-left: 30px solid $pr-success-color;
+
+      &:before {
+        content: "\f00c";
+      }
+    }
+
+    &.status-error {
+      border-color: $pr-error-color;
+      border-left: 30px solid $pr-error-color;
+
+      &:before {
+        content: "\f12a";
+      }
+    }
+
+    &.status-failure {
+      border-color: $pr-failure-color;
+      border-left: 30px solid $pr-failure-color;
+
+      &:before {
+        content: "\f00d";
+      }
+    }
+
+    &.status-pending {
+      border-color: $pr-pending-color;
+      border-left: 30px solid $pr-pending-color;
+
+      &:before {
+        content: "\f141";
+      }
+    }
+
     .pr-number {
       color: #AAAAAA;
     }
 
     .pr-comments {
+      margin: 0 0.5em;
+    }
+
+    .pr-commits {
+      margin: 0 0.5em;
+    }
+
+    .pr-deletions {
       margin: 0 0.5em;
     }
 
