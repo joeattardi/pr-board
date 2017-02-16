@@ -19,3 +19,7 @@ export function getRepo(owner, repo) {
 export function getPullRequests(owner, repo) {
   return apiRequest(`${GITHUB_BASE_URL}/repos/${owner}/${repo}/pulls`);
 }
+
+export function getPullRequestDetails(fullRepoPath, pullRequestId) {
+  return apiRequest(`${GITHUB_BASE_URL}/repos/${fullRepoPath}/pulls/${pullRequestId}`);
+}

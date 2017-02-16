@@ -14,6 +14,10 @@
           {{ pullRequest.base.repo.full_name }}
         </a>
         <span class="pr-number">#{{ pullRequest.number }}</span>
+        <span class="pr-comments" :title="pullRequest.comments + ' comments'">
+          <i class="fa fa-comment" aria-hidden="true"></i>
+          {{ pullRequest.comments }}
+        </span>
       </div>
       <div class="pr-created" :title="pullRequest.created_at">
         Opened by {{ pullRequest.user.login }} {{ relativeCreatedTime }}
@@ -63,6 +67,10 @@
 
     .pr-number {
       color: #AAAAAA;
+    }
+
+    .pr-comments {
+      margin: 0 0.5em;
     }
 
     .pr-created {
