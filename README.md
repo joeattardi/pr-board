@@ -1,4 +1,4 @@
-# pr-board
+# PR Board
 Dashboard for GitHub pull requests
 
 PR Board is a site that lets you put together dashboards aggregating pull request data from multiple 
